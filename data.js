@@ -68,14 +68,16 @@ const portfolioData = {
             institution: "Indian Institute of Information Technology Dharwad",
             degree: "B.Tech in Computer Science and Engineering",
             period: "2023 - 2027",
-            result: "CGPA: 7.64 / 10"
+            result: "CGPA: 7.64 / 10",
+            logo: { src: "images/logos/iiit-dharwad.webp", alt: "IIIT Dharwad", width: 250, height: 250 }
         }
     ],
     leadership: [
         {
             organization: "IEEE Student Branch, IIIT Dharwad",
             role: "Chair",
-            summary: "Led the branch in organising technical events across the campus community."
+            summary: "Led the branch in organising technical events across the campus community.",
+            logo: { src: "images/logos/ieee.svg", alt: "IEEE", width: 233, height: 131 }
         }
     ],
     social: [

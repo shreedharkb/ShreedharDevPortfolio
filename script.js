@@ -28,6 +28,17 @@ function link(label, href, className = "text-link") {
     return anchor;
 }
 
+function logoImage(logo) {
+    const image = el("img", "org-logo");
+    image.src = logo.src;
+    image.alt = logo.alt;
+    // Intrinsic size alongside a CSS height keeps the card from reflowing while
+    // the mark loads.
+    image.width = logo.width;
+    image.height = logo.height;
+    return image;
+}
+
 function typeInto(el, text, speed = 55) {
     // The full name stays in aria-label so assistive tech reads it whole rather
     // than catching whatever fragment exists when it looks.
@@ -226,11 +237,13 @@ function renderEducation() {
     const educationList = qs("#education-list");
     portfolioData.education.forEach((education) => {
         const card = el("article", "education-box");
-        card.append(
+        const body = el("div", "card-body");
+        body.append(
             el("h3", "", education.institution),
             el("p", "summary", `${education.degree} / ${education.period}`),
             el("p", "meta", education.result)
         );
+        card.append(logoImage(education.logo), body);
         educationList.append(card);
     });
 }
@@ -239,7 +252,12 @@ function renderLeadership() {
     const leadershipList = qs("#leadership-list");
     portfolioData.leadership.forEach((entry) => {
         const card = el("article", "leadership-card");
-        card.append(el("h3", "", `${entry.organization} - ${entry.role}`), el("p", "summary", entry.summary));
+        const body = el("div", "card-body");
+        body.append(
+            el("h3", "", `${entry.organization} - ${entry.role}`),
+            el("p", "summary", entry.summary)
+        );
+        card.append(logoImage(entry.logo), body);
         leadershipList.append(card);
     });
 }

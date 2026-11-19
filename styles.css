@@ -362,6 +362,26 @@ h3 {
     align-items: start;
 }
 
+/* The institution mark gets its own column so the card text keeps one left
+   edge, and the pair stays vertically centred against each other. */
+.education-box,
+.leadership-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.org-logo {
+    flex: none;
+    width: auto;
+    height: 56px;
+    object-fit: contain;
+}
+
+.leadership-card .org-logo {
+    height: 40px;
+}
+
 .meta {
     margin: 0 0 7px;
     color: var(--amber);
@@ -815,6 +835,19 @@ h3 {
     .contact-card,
     .project-card {
         padding: 16px;
+    }
+
+    .education-box,
+    .leadership-card {
+        gap: 14px;
+    }
+
+    .org-logo {
+        height: 44px;
+    }
+
+    .leadership-card .org-logo {
+        height: 30px;
     }
 
     .point-list {
