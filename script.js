@@ -35,7 +35,37 @@ function renderHero() {
     qs("#hero-location").textContent = basic.location;
     qs("#hero-photo").src = basic.profileImage;
     qs("#hero-photo").alt = `${basic.name} portrait`;
-    qs("#nav-resume").href = basic.resumeLink;
+
+    const resume = qs("#nav-resume");
+    if (basic.resumeLink) {
+        resume.href = basic.resumeLink;
+    } else {
+        resume.hidden = true;
+    }
+}
+
+// A section whose source array is empty would render as a heading over an empty
+// box, and its nav link would scroll to nothing. Contact is excluded because it
+// renders from objects, not arrays.
+function hideEmptySections() {
+    const sources = {
+        experience: portfolioData.experience,
+        projects: portfolioData.projects,
+        hackathons: portfolioData.achievements,
+        skills: portfolioData.skills,
+        education: portfolioData.education,
+        leadership: portfolioData.leadership
+    };
+
+    Object.entries(sources).forEach(([id, items]) => {
+        if (items.length) return;
+        qs(`#${id}`).hidden = true;
+        document.querySelector(`.site-nav a[href="#${id}"]`)?.remove();
+    });
+
+    if (!portfolioData.archivedProjects.length) {
+        qs("#archive-toggle").hidden = true;
+    }
 }
 
 function renderExperience() {
@@ -252,6 +282,7 @@ function initialize() {
     renderEducation();
     renderLeadership();
     renderContact();
+    hideEmptySections();
     initializeDialog();
     initializeNavigationState();
 }

@@ -817,3 +817,9 @@ h3 {
         animation: none !important;
     }
 }
+
+/* Several rules above set an explicit display, which beats the UA [hidden] rule
+   and leaves hidden elements on screen. */
+[hidden] {
+    display: none !important;
+}
