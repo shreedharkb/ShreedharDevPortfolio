@@ -749,8 +749,10 @@ h3 {
         padding: 22px;
     }
 
+    /* 13 characters of monospace need to fit the panel on one line. At the
+       previous 14vw the name broke and orphaned "B" on every phone. */
     h1 {
-        font-size: clamp(2.6rem, 14vw, 3.45rem);
+        font-size: clamp(2rem, 10.4vw, 4.2rem);
         line-height: 1;
     }
 
