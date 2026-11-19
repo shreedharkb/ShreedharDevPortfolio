@@ -213,7 +213,7 @@ button {
     width: 100%;
     aspect-ratio: 4 / 5;
     object-fit: cover;
-    object-position: center 28%;
+    object-position: 6% 30%;
     border-radius: 6px;
     filter: saturate(0.92) contrast(1.04);
 }
@@ -240,10 +240,11 @@ p {
 }
 
 h1 {
-    max-width: 720px;
+    max-width: none;
     margin-bottom: 12px;
     color: #ffffff;
-    font-size: clamp(3rem, 8vw, 6.4rem);
+    font-size: clamp(2.2rem, 5.6vw, 4.4rem);
+    text-wrap: balance;
     line-height: 0.96;
     letter-spacing: 0;
 }
