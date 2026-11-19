@@ -385,13 +385,38 @@ h3 {
     gap: 8px;
 }
 
-.tag-list span {
-    padding: 6px 8px;
+.skill-badge {
+    --brand-color: var(--green);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 11px;
     color: var(--text);
-    background: rgba(255, 255, 255, 0.045);
+    background-color: rgba(255, 255, 255, 0.045);
     border: 1px solid var(--line);
-    border-radius: 6px;
-    font-size: 0.82rem;
+    border-radius: 9px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    transition:
+        border-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 160ms ease,
+        transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skill-badge svg {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    color: var(--brand-color);
+}
+
+.skill-badge:hover {
+    border-color: color-mix(in srgb, var(--brand-color) 45%, transparent);
+    background-color: color-mix(in srgb, var(--brand-color) 10%, transparent);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--brand-color) 20%, transparent);
+    transform: translateY(-2px);
 }
 
 .project-grid {
@@ -803,7 +828,7 @@ h3 {
         gap: 7px;
     }
 
-    .tag-list span,
+    .skill-badge,
     .social-link {
         font-size: 0.82rem;
     }
@@ -842,4 +867,105 @@ h3 {
    being typed rather than showing two blinking cursors at once. */
 .hero-copy-block:has(#hero-title.typing) .command::after {
     content: none;
+}
+
+/* Custom pointer: a dot that tracks exactly and a ring that trails behind it. */
+.cursor-ring-wrap,
+.cursor-dot-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    pointer-events: none;
+    will-change: transform;
+    transform: translate3d(-100px, -100px, 0);
+    /* Blending lives on the wrapper because the transform on it already isolates
+       a child's mix-blend-mode from the rest of the page. */
+    mix-blend-mode: difference;
+    transition: opacity 200ms ease;
+}
+
+.cursor-ring {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    transition:
+        transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 300ms ease;
+}
+
+.cursor-dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 1.5px;
+    background: #ffffff;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.55), 0 0 2px rgba(255, 255, 255, 0.9);
+    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: cursor-led 2.6s ease-in-out infinite;
+}
+
+.cursor-ring.locked {
+    border-color: rgba(255, 255, 255, 0.75);
+    transform: scale(1.85);
+}
+
+.cursor-dot.locked {
+    transform: scale(1.5);
+}
+
+.cursor-ring.firing {
+    transform: scale(0.8);
+}
+
+.cursor-dot.firing {
+    transform: scale(0.85);
+}
+
+@keyframes cursor-led {
+    50% {
+        opacity: 0.45;
+    }
+}
+
+@media (pointer: fine) {
+    body,
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    .project-preview,
+    .achievement-preview,
+    .skill-badge {
+        cursor: none;
+    }
+}
+
+/* Touch pointers have nowhere to park a hovering ring. */
+@media (pointer: coarse) {
+    .cursor-ring-wrap,
+    .cursor-dot-wrap {
+        display: none;
+    }
+}
+
+@media (pointer: fine) {
+    html[data-dialog-open="true"] .cursor-ring-wrap,
+    html[data-dialog-open="true"] .cursor-dot-wrap {
+        display: none;
+    }
+
+    html[data-dialog-open="true"] .image-dialog,
+    html[data-dialog-open="true"] .image-dialog * {
+        cursor: auto;
+    }
+
+    html[data-dialog-open="true"] .image-dialog button {
+        cursor: pointer;
+    }
 }

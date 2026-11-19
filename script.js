@@ -1,4 +1,7 @@
 import portfolioData from "./data.js";
+import { skillIcons } from "./icons.js";
+
+const SVG_NS = "http://www.w3.org/2000/svg";
 
 const qs = (selector, parent = document) => parent.querySelector(selector);
 const qsa = (selector, parent = document) => [...parent.querySelectorAll(selector)];
@@ -252,6 +255,11 @@ function renderContact() {
 
 function initializeDialog() {
     const dialog = qs("#image-dialog");
+    // A modal dialog paints in the top layer, above the custom pointer, so the
+    // native cursor has to take over while one is open.
+    dialog.addEventListener("toggle", () => {
+        document.documentElement.dataset.dialogOpen = String(dialog.open);
+    });
     qs("#dialog-close").addEventListener("click", () => dialog.close());
     dialog.addEventListener("click", (event) => {
         if (event.target === dialog) {
@@ -279,9 +287,37 @@ function pointList(points) {
     return list;
 }
 
+function svgIcon(icon) {
+    const svg = document.createElementNS(SVG_NS, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("aria-hidden", "true");
+    if (icon.stroke) {
+        svg.setAttribute("fill", "none");
+        svg.setAttribute("stroke", "currentColor");
+        svg.setAttribute("stroke-width", "1.7");
+        svg.setAttribute("stroke-linecap", "round");
+        svg.setAttribute("stroke-linejoin", "round");
+    } else {
+        svg.setAttribute("fill", "currentColor");
+    }
+    const path = document.createElementNS(SVG_NS, "path");
+    path.setAttribute("d", icon.d);
+    svg.append(path);
+    return svg;
+}
+
 function tagList(tags) {
     const wrap = el("div", "tag-list");
-    tags.forEach((tag) => wrap.append(el("span", "", tag)));
+    tags.forEach((tag) => {
+        const icon = skillIcons[tag.toLowerCase()];
+        const badge = el("span", "skill-badge");
+        if (icon) {
+            badge.append(svgIcon(icon));
+        }
+        badge.append(el("span", "", tag));
+        badge.style.setProperty("--brand-color", icon ? icon.color : "var(--green)");
+        wrap.append(badge);
+    });
     return wrap;
 }
 
@@ -300,6 +336,63 @@ function initializeNavigationState() {
     sections.forEach((section) => observer.observe(section));
 }
 
+const CURSOR_LOCKS = "a, button, input, select, textarea, summary, .skill-badge";
+
+function initializeCursor() {
+    const ringWrap = qs(".cursor-ring-wrap");
+    const dotWrap = qs(".cursor-dot-wrap");
+    if (!ringWrap || !dotWrap || !matchMedia("(pointer: fine)").matches) {
+        return;
+    }
+
+    const ring = qs(".cursor-ring", ringWrap);
+    const dot = qs(".cursor-dot", dotWrap);
+
+    let targetX = -100;
+    let targetY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    let frame = null;
+
+    // The ring trails the pointer; catching up instantly would just be a second cursor.
+    const trail = matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 0.2;
+
+    const step = () => {
+        ringX += (targetX - ringX) * trail;
+        ringY += (targetY - ringY) * trail;
+        ringWrap.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+        const stillTrailing = Math.abs(targetX - ringX) > 0.2 || Math.abs(targetY - ringY) > 0.2;
+        frame = stillTrailing ? requestAnimationFrame(step) : null;
+    };
+
+    document.addEventListener("pointermove", (event) => {
+        targetX = event.clientX;
+        targetY = event.clientY;
+        dotWrap.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`;
+        if (frame === null) {
+            frame = requestAnimationFrame(step);
+        }
+        const isLocked = Boolean(event.target.closest && event.target.closest(CURSOR_LOCKS));
+        ring.classList.toggle("locked", isLocked);
+        dot.classList.toggle("locked", isLocked);
+    });
+
+    const setFiring = (on) => {
+        ring.classList.toggle("firing", on);
+        dot.classList.toggle("firing", on);
+    };
+    document.addEventListener("pointerdown", () => setFiring(true));
+    document.addEventListener("pointerup", () => setFiring(false));
+    document.addEventListener("pointercancel", () => setFiring(false));
+
+    const setOpacity = (value) => {
+        ringWrap.style.opacity = value;
+        dotWrap.style.opacity = value;
+    };
+    document.documentElement.addEventListener("mouseleave", () => setOpacity("0"));
+    document.documentElement.addEventListener("mouseenter", () => setOpacity("1"));
+}
+
 function initialize() {
     renderHero();
     renderExperience();
@@ -312,6 +405,7 @@ function initialize() {
     hideEmptySections();
     initializeDialog();
     initializeNavigationState();
+    initializeCursor();
 }
 
 document.addEventListener("DOMContentLoaded", initialize);
