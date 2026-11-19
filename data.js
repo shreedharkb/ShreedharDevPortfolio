@@ -1,67 +1,106 @@
 const portfolioData = {
     basic: {
-        name: "YOUR NAME",
-        role: "Full-stack | AI/ML",
+        name: "Shreedhar K B",
+        role: "B.Tech CSE Student | Full-stack | AI",
         location: "Dharwad, India",
-        email: "you@example.com",
+        email: "shreedharkb4@gmail.com",
         resumeLink: "",
-        profileImage: "images/profile_photo/hero-portrait.png",
-        intro: "One or two sentences about what you build."
+        profileImage: "images/profile_photo/me.jpeg",
+        intro: "CS undergrad at IIIT Dharwad. I ship full-stack apps and AI engines, and obsess over clean interfaces."
     },
-    experience: [
-        {
-            title: "Role Title",
-            company: "Company",
-            period: "Mon YYYY - Mon YYYY",
-            location: "City",
-            tags: ["Tech", "Tech"],
-            summary: "One line on what the work was.",
-            points: [
-                "Achievement bullet with a number in it.",
-                "Another bullet."
-            ]
-        }
-    ],
+    experience: [],
     projects: [
         {
-            name: "ProjectName",
-            type: "What it is in four words",
-            link: "https://live-url",
-            github: "https://github.com/you/repo",
-            image: "images/projects/projectname.png",
-            stack: ["React", "Node.js"],
-            summary: "One line.",
+            name: "LexFind",
+            type: "AI-powered legal research platform",
+            link: "https://lex-find.vercel.app/",
+            github: "https://github.com/shreedharkb/LexFind",
+            image: "images/projects/lexfind.png",
+            stack: ["Python", "FastAPI", "React", "PostgreSQL", "Qdrant", "LangGraph", "LangChain", "Groq LLM", "Docker", "Azure"],
+            summary: "An AI-native legal research platform with agentic workflows and interactive conversational search.",
             points: [
-                "Bullet with a measurable outcome.",
-                "Bullet on a hard technical decision."
+                "Achieved 82.3% retrieval accuracy on a 46k-document corpus using Qdrant Hybrid RRF and LangChain.",
+                "Built agentic search workflows that answer legal questions conversationally."
+            ]
+        },
+        {
+            name: "Speechify",
+            type: "AI-powered semantic quiz platform",
+            link: "https://speechify-psi.vercel.app/",
+            github: "https://github.com/shreedharkb/Speechify",
+            image: "images/projects/speechify.png",
+            stack: ["React", "Node.js", "PostgreSQL", "Prisma", "Redis", "PyTorch", "Jenkins", "Docker"],
+            summary: "An interactive AI grading engine for semantic evaluation of open-ended answers.",
+            points: [
+                "Reached over 90% grading accuracy with a PyTorch model.",
+                "Served answers through RESTful Node.js microservices with Redis queuing.",
+                "Automated delivery with a Jenkins CI/CD pipeline."
+            ]
+        },
+        {
+            name: "FinOS",
+            type: "AI-powered personal finance OS",
+            link: "https://fin-os-self.vercel.app/",
+            github: "https://github.com/shreedharkb/FinOS",
+            image: "images/projects/finos.png",
+            stack: ["Next.js", "React", "PostgreSQL", "Prisma", "Google Gemini", "Inngest", "Tailwind CSS", "Clerk"],
+            summary: "A financial dashboard that turns receipt photos into structured data.",
+            points: [
+                "Used Google Gemini Vision to parse unstructured receipts into structured entries.",
+                "Wired ingestion into event-driven serverless workflows with Inngest."
+            ]
+        },
+        {
+            name: "AtlasAI",
+            type: "AI-powered travel agent",
+            link: "https://atlas-ai-teal.vercel.app/",
+            github: "https://github.com/shreedharkb/AtlasAI",
+            image: "images/projects/atlasai.png",
+            stack: ["Next.js", "React", "Groq", "Tailwind CSS", "dnd-kit", "Framer Motion"],
+            summary: "A trip planner that converts open-ended prompts into interactive itineraries.",
+            points: [
+                "Streamed generated itineraries server-side to keep first paint fast.",
+                "Added auto-repairing JSON parsers so malformed model output still renders.",
+                "Built a drag-and-drop itinerary editor with dnd-kit."
             ]
         }
     ],
     archivedProjects: [],
     achievements: [],
     skills: [
-        { group: "Languages", items: [] },
-        { group: "Frontend", items: [] },
-        { group: "Backend", items: [] },
-        { group: "Databases", items: [] },
-        { group: "Tools + Cloud", items: [] },
-        { group: "Core CS", items: [] }
+        { group: "Languages", items: ["Python", "JavaScript", "C++"] },
+        { group: "Frontend", items: ["React", "Next.js"] },
+        { group: "Backend", items: ["Node.js", "FastAPI"] },
+        { group: "Databases", items: ["PostgreSQL"] },
+        { group: "AI", items: ["LangChain"] },
+        { group: "Tools + Cloud", items: ["Docker"] }
     ],
     education: [
         {
-            institution: "IIIT Dharwad",
-            degree: "Bachelor of Technology, Computer Science and Engineering",
-            period: "2023 - 2027",
-            result: "CGPA here"
+            institution: "Indian Institute of Information Technology Dharwad",
+            degree: "B.Tech in Computer Science and Engineering",
+            period: "Sept 2023 - May 2027",
+            result: ""
         }
     ],
-    leadership: [],
+    leadership: [
+        {
+            organization: "IEEE Student Branch, IIIT Dharwad",
+            role: "Chair",
+            summary: "Led the campus IEEE student community as Chair, Aug 2025 - Apr 2026."
+        },
+        {
+            organization: "IEEE Computer Society, IIIT Dharwad",
+            role: "Chair",
+            summary: "Chaired the Computer Society chapter, Jan 2025 - Apr 2026."
+        }
+    ],
     social: [
-        { label: "GitHub", href: "https://github.com/YOUR_USERNAME" },
-        { label: "LinkedIn", href: "https://www.linkedin.com/in/YOUR_HANDLE/" }
+        { label: "GitHub", href: "https://github.com/shreedharkb" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/in/shreedharkb" }
     ],
     contact: {
-        pitch: "Open to roles and opportunities."
+        pitch: "Open to internships and full-time roles in full-stack engineering and applied AI."
     }
 };
 
