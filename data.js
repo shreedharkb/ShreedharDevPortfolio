@@ -4,95 +4,80 @@ const portfolioData = {
         role: "B.Tech CSE Student | Full-stack | AI",
         location: "Dharwad, India",
         email: "shreedharkb4@gmail.com",
-        resumeLink: "",
+        resumeLink: "resume/Shreedhar_KB_Resume.pdf",
         profileImage: "images/profile_photo/me.jpeg",
-        intro: "CS undergrad at IIIT Dharwad. I ship full-stack apps and AI engines, and obsess over clean interfaces."
+        intro: "CS undergrad at IIIT Dharwad. I build agentic AI systems and the full-stack products that put them in front of users."
     },
     experience: [],
     projects: [
         {
             name: "LexFind",
-            type: "AI-powered legal research platform",
+            type: "Agentic AI legal research platform",
             link: "https://lex-find.vercel.app/",
             github: "https://github.com/shreedharkb/LexFind",
             image: "images/projects/lexfind.png",
-            stack: ["Python", "FastAPI", "React", "PostgreSQL", "Qdrant", "LangGraph", "LangChain", "Groq LLM", "Docker", "Azure"],
-            summary: "An AI-native legal research platform with agentic workflows and interactive conversational search.",
+            stack: ["FastAPI", "React", "Qdrant", "RAG", "LangGraph", "Celery", "RabbitMQ", "pgvector"],
+            summary: "Retrieval-augmented legal research over a large corpus, driven by an agent that decides how each query should be answered.",
             points: [
-                "Achieved 82.3% retrieval accuracy on a 46k-document corpus using Qdrant Hybrid RRF and LangChain.",
-                "Built agentic search workflows that answer legal questions conversationally."
+                "Built a LangGraph agent that routes each query to corpus search, document Q&A, or general chat.",
+                "Added a self-correcting retrieval loop where an LLM grader triggers query relaxation and retry.",
+                "Implemented hybrid search fusing BM25 and dense vectors with RRF over section-aware chunks.",
+                "Offloaded PDF ingestion to Celery and RabbitMQ workers, storing chunks in pgvector."
             ]
         },
         {
             name: "Speechify",
-            type: "AI-powered semantic quiz platform",
+            type: "AI quiz grader",
             link: "https://speechify-psi.vercel.app/",
             github: "https://github.com/shreedharkb/Speechify",
             image: "images/projects/speechify.png",
-            stack: ["React", "Node.js", "PostgreSQL", "Prisma", "Redis", "PyTorch", "Jenkins", "Docker"],
-            summary: "An interactive AI grading engine for semantic evaluation of open-ended answers.",
+            stack: ["React", "Node.js", "Sentence-BERT", "Redis", "Whisper", "Jenkins", "Docker"],
+            summary: "A quiz platform that grades free-text and spoken answers semantically rather than by exact match.",
             points: [
-                "Reached over 90% grading accuracy with a PyTorch model.",
-                "Served answers through RESTful Node.js microservices with Redis queuing.",
-                "Automated delivery with a Jenkins CI/CD pipeline."
+                "Developed a quiz platform with text and voice answers transcribed by a Whisper microservice.",
+                "Designed a layered NLP grader using lexical gating, Sentence-BERT, and negation penalties.",
+                "Decoupled grading with Bull and Redis queues and retries, then pushed live results to students.",
+                "Configured Jenkins CI/CD running SonarQube, OWASP, and Trivy scans before Docker builds."
             ]
         },
         {
             name: "FinOS",
-            type: "AI-powered personal finance OS",
+            type: "AI finance manager",
             link: "https://fin-os-self.vercel.app/",
             github: "https://github.com/shreedharkb/FinOS",
             image: "images/projects/finos.png",
-            stack: ["Next.js", "React", "PostgreSQL", "Prisma", "Google Gemini", "Inngest", "Tailwind CSS", "Clerk"],
-            summary: "A financial dashboard that turns receipt photos into structured data.",
+            stack: ["Next.js", "PostgreSQL", "Google Gemini", "Inngest", "Prisma", "Clerk", "Arcjet"],
+            summary: "A personal finance dashboard that turns receipt photos into categorised, budgeted transactions.",
             points: [
-                "Used Google Gemini Vision to parse unstructured receipts into structured entries.",
-                "Wired ingestion into event-driven serverless workflows with Inngest."
-            ]
-        },
-        {
-            name: "AtlasAI",
-            type: "AI-powered travel agent",
-            link: "https://atlas-ai-teal.vercel.app/",
-            github: "https://github.com/shreedharkb/AtlasAI",
-            image: "images/projects/atlasai.png",
-            stack: ["Next.js", "React", "Groq", "Tailwind CSS", "dnd-kit", "Framer Motion"],
-            summary: "A trip planner that converts open-ended prompts into interactive itineraries.",
-            points: [
-                "Streamed generated itineraries server-side to keep first paint fast.",
-                "Added auto-repairing JSON parsers so malformed model output still renders.",
-                "Built a drag-and-drop itinerary editor with dnd-kit."
+                "Integrated Gemini Vision to extract amount, date, and category from receipts into the form.",
+                "Automated budget alerts, recurring transactions, and monthly AI reports with Inngest workflows.",
+                "Secured mutations with Clerk auth and Arcjet rate limiting, using atomic Prisma transactions."
             ]
         }
     ],
     archivedProjects: [],
     achievements: [],
     skills: [
-        { group: "Languages", items: ["Python", "JavaScript", "C++"] },
-        { group: "Frontend", items: ["React", "Next.js"] },
-        { group: "Backend", items: ["Node.js", "FastAPI"] },
-        { group: "Databases", items: ["PostgreSQL"] },
-        { group: "AI", items: ["LangChain"] },
-        { group: "Tools + Cloud", items: ["Docker"] }
+        { group: "Languages", items: ["C++", "JavaScript", "Python"] },
+        { group: "Web + Backend", items: ["React", "Next.js", "Node.js", "Express", "FastAPI", "REST APIs"] },
+        { group: "Databases + Tools", items: ["PostgreSQL", "MongoDB", "Qdrant", "Redis", "Git"] },
+        { group: "Cloud + DevOps", items: ["Docker", "Jenkins", "Linux", "Azure"] },
+        { group: "AI + ML", items: ["RAG", "LangGraph"] },
+        { group: "Core CS", items: ["Data Structures & Algorithms", "Object-Oriented Programming", "Operating Systems", "Computer Networks", "Database Management Systems"] }
     ],
     education: [
         {
             institution: "Indian Institute of Information Technology Dharwad",
             degree: "B.Tech in Computer Science and Engineering",
-            period: "Sept 2023 - May 2027",
-            result: ""
+            period: "2023 - 2027",
+            result: "CGPA: 7.64 / 10"
         }
     ],
     leadership: [
         {
             organization: "IEEE Student Branch, IIIT Dharwad",
             role: "Chair",
-            summary: "Led the campus IEEE student community as Chair, Aug 2025 - Apr 2026."
-        },
-        {
-            organization: "IEEE Computer Society, IIIT Dharwad",
-            role: "Chair",
-            summary: "Chaired the Computer Society chapter, Jan 2025 - Apr 2026."
+            summary: "Led the branch in organising technical events across the campus community."
         }
     ],
     social: [
