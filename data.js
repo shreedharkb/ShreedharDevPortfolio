@@ -21,8 +21,7 @@ const portfolioData = {
             points: [
                 "Built a LangGraph agent that routes each query to corpus search, document Q&A, or general chat.",
                 "Added a self-correcting retrieval loop where an LLM grader triggers query relaxation and retry.",
-                "Implemented hybrid search fusing BM25 and dense vectors with RRF over section-aware chunks.",
-                "Offloaded PDF ingestion to Celery and RabbitMQ workers, storing chunks in pgvector."
+                "Implemented hybrid search fusing BM25 and dense vectors with RRF over section-aware chunks."
             ]
         },
         {
@@ -36,8 +35,7 @@ const portfolioData = {
             points: [
                 "Developed a quiz platform with text and voice answers transcribed by a Whisper microservice.",
                 "Designed a layered NLP grader using lexical gating, Sentence-BERT, and negation penalties.",
-                "Decoupled grading with Bull and Redis queues and retries, then pushed live results to students.",
-                "Configured Jenkins CI/CD running SonarQube, OWASP, and Trivy scans before Docker builds."
+                "Decoupled grading with Bull and Redis queues and retries, then pushed live results to students."
             ]
         },
         {
