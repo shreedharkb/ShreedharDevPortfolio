@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shreedhar K B - B.Tech Computer Science student at IIIT Dharwad, building full-stack and AI/ML projects.">
+    <title>Shreedhar K B | Software Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <a class="brand-mark" href="#home" aria-label="Shreedhar K B home">SK</a>
+        <nav class="site-nav" aria-label="Primary navigation">
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#hackathons">Hackathons</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+            <a href="#leadership">Leadership</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <a class="nav-action" id="nav-resume" href="https://drive.google.com/drive/folders/1QjZVcpZJUmbJgMLxYwYiMmSWtHjXTdDH?usp=drive_link" target="_blank" rel="noopener noreferrer">Resume</a>
+    </header>
+
+    <main id="main">
+        <section class="hero" id="home" aria-labelledby="hero-title">
+            <div class="terminal-panel">
+                <div class="terminal-topbar" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <p>shreedhar@devfolio:~</p>
+                </div>
+                <div class="terminal-body hero-terminal">
+                    <div class="hero-copy-block">
+                        <p class="command">$ whoami</p>
+                        <h1 id="hero-title"></h1>
+                        <p class="role-line" id="hero-role"></p>
+                        <p class="hero-copy" id="hero-intro"></p>
+                        <div class="terminal-meta">
+                            <span id="hero-location"></span>
+                        </div>
+                    </div>
+                    <figure class="hero-photo-frame">
+                        <img id="hero-photo" src="" alt="">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="experience">
+            <div class="section-title">
+                <p class="command">$ ls experience/</p>
+                <h2>Experience</h2>
+            </div>
+            <div class="timeline" id="experience-list"></div>
+        </section>
+
+        <section class="section" id="projects">
+            <div class="section-title">
+                <p class="command">$ ls projects/</p>
+                <h2>Projects</h2>
+            </div>
+            <div class="project-grid" id="project-grid"></div>
+            <div class="archive-panel">
+                <button class="archive-toggle" id="archive-toggle" type="button" aria-expanded="false" aria-controls="archive-grid">
+                    show archived builds
+                </button>
+                <div class="archive-grid" id="archive-grid" hidden></div>
+            </div>
+        </section>
+
+        <section class="section" id="hackathons">
+            <div class="section-title">
+                <p class="command">$ cat hackathon-wins.md</p>
+                <h2>Hackathon Wins</h2>
+            </div>
+            <div class="achievement-grid" id="achievement-grid"></div>
+        </section>
+
+        <section class="section" id="skills">
+            <div class="section-title">
+                <p class="command">$ printenv SKILLS</p>
+                <h2>Skills</h2>
+            </div>
+            <div class="skill-board" id="skill-board"></div>
+        </section>
+
+        <section class="section" id="education">
+            <div class="section-title">
+                <p class="command">$ cat education.txt</p>
+                <h2>Education</h2>
+            </div>
+            <div class="education-list" id="education-list"></div>
+        </section>
+
+        <section class="section" id="leadership">
+            <div class="section-title">
+                <p class="command">$ cat leadership.txt</p>
+                <h2>Leadership</h2>
+            </div>
+            <div class="leadership-list" id="leadership-list"></div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="section-title">
+                <p class="command">$ ./contact</p>
+                <h2>Contact</h2>
+            </div>
+            <div class="contact-card">
+                <p id="contact-pitch"></p>
+                <div class="social-links" id="social-links"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p id="footer-copy"></p>
+    </footer>
+
+    <dialog class="image-dialog" id="image-dialog" aria-label="Project preview">
+        <button class="dialog-close" type="button" id="dialog-close" aria-label="Close preview">Close</button>
+        <img id="dialog-image" alt="">
+        <p id="dialog-caption"></p>
+    </dialog>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
