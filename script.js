@@ -39,6 +39,7 @@ function renderHero() {
     const resume = qs("#nav-resume");
     if (basic.resumeLink) {
         resume.href = basic.resumeLink;
+        resume.hidden = false;
     } else {
         resume.hidden = true;
     }
