@@ -25,11 +25,37 @@ function link(label, href, className = "text-link") {
     return anchor;
 }
 
+function typeInto(el, text, speed = 55) {
+    // The full name stays in aria-label so assistive tech reads it whole rather
+    // than catching whatever fragment exists when it looks.
+    el.setAttribute("aria-label", text);
+    el.classList.add("typing");
+
+    let shown = 0;
+    const step = () => {
+        el.textContent = text.slice(0, ++shown);
+        if (shown < text.length) {
+            setTimeout(step, speed);
+        } else {
+            el.classList.remove("typing");
+        }
+    };
+
+    setTimeout(step, 320);
+}
+
 function renderHero() {
     const { basic } = portfolioData;
     document.title = `${basic.name} | ${basic.role}`;
 
-    qs("#hero-title").textContent = basic.name;
+    const title = qs("#hero-title");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        title.textContent = basic.name;
+        title.setAttribute("aria-label", basic.name);
+    } else {
+        typeInto(title, basic.name);
+    }
+
     qs("#hero-role").textContent = basic.role;
     qs("#hero-intro").textContent = basic.intro;
     qs("#hero-location").textContent = basic.location;

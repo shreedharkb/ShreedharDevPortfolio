@@ -824,3 +824,22 @@ h3 {
 [hidden] {
     display: none !important;
 }
+
+/* Typewriter reveal for the hero name. */
+#hero-title {
+    /* One line of height reserved up front, otherwise the block below jumps
+       while the name grows from empty. */
+    min-height: 0.96em;
+}
+
+#hero-title.typing::after {
+    content: "_";
+    color: var(--green);
+    animation: blink 1.1s step-end infinite;
+}
+
+/* The $ whoami line carries its own caret, so silence it while the name is
+   being typed rather than showing two blinking cursors at once. */
+.hero-copy-block:has(#hero-title.typing) .command::after {
+    content: none;
+}
