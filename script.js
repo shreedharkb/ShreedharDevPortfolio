@@ -31,7 +31,15 @@ function link(label, href, className = "text-link") {
 function logoImage(logo) {
     // The mark gets a plate rather than sitting flat on the card: these logos are
     // white mono art and a bare one reads as a rendering glitch on this palette.
-    const plate = el("span", "logo-plate");
+    // When the institution gives us a site, the plate itself becomes the link so
+    // the whole mark is the hit area and the custom cursor locks onto it.
+    const plate = el(logo.href ? "a" : "span", "logo-plate");
+    if (logo.href) {
+        plate.href = logo.href;
+        plate.target = "_blank";
+        plate.rel = "noopener noreferrer";
+        plate.setAttribute("aria-label", `${logo.alt} website`);
+    }
     const image = el("img", "org-logo");
     image.src = logo.src;
     image.alt = logo.alt;

@@ -594,6 +594,11 @@ h3 {
     transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
 }
 
+a.logo-plate {
+    color: inherit;
+    text-decoration: none;
+}
+
 .org-logo {
     width: 100%;
     height: 100%;

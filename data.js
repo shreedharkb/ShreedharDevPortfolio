@@ -1,7 +1,7 @@
 const portfolioData = {
     basic: {
         name: "Shreedhar K B",
-        role: "B.Tech CSE Student | Full-stack | AI",
+        role: "B.Tech CSE Student | Full-stack & AI",
         location: "Dharwad, India",
         email: "shreedharkb4@gmail.com",
         resumeLink: "resume/Shreedhar_KB_Resume.pdf",
@@ -69,7 +69,7 @@ const portfolioData = {
             degree: "B.Tech in Computer Science and Engineering",
             period: "2023 - 2027",
             result: "CGPA: 7.64 / 10",
-            logo: { src: "images/logos/iiit-dharwad.webp", alt: "IIIT Dharwad", width: 250, height: 250 }
+            logo: { src: "images/logos/iiit-dharwad.webp", alt: "IIIT Dharwad", width: 250, height: 250, href: "https://iiitdwd.ac.in/" }
         }
     ],
     leadership: [
