@@ -77,7 +77,7 @@ const portfolioData = {
             organization: "IEEE Student Branch, IIIT Dharwad",
             role: "Chair",
             summary: "Led the branch in organising technical events across the campus community.",
-            logo: { src: "images/logos/ieee.svg", alt: "IEEE", width: 233, height: 131 }
+            logo: { src: "images/logos/ieee.svg", alt: "IEEE", width: 233, height: 68 }
         }
     ],
     social: [

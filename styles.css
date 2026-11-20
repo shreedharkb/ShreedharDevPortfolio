@@ -81,17 +81,33 @@ button {
     position: sticky;
     top: 0;
     z-index: 50;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 18px;
-    align-items: center;
+    display: flex;
+    justify-content: center;
     width: min(var(--max-width), calc(100% - 28px));
     margin: 12px auto 0;
-    padding: 10px;
-    background: rgba(5, 8, 6, 0.9);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    backdrop-filter: blur(14px);
+}
+
+.pill-nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 7px;
+    border-radius: 999px;
+    background: rgba(5, 8, 6, 0.88);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: inset 0 0 0 1px var(--line), inset 0 1px rgba(255, 255, 255, 0.07), 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.brand-mark,
+.site-nav,
+.nav-action,
+.nav-toggle {
+    position: relative;
+    z-index: 2;
+    flex: none;
 }
 
 .brand-mark {
@@ -101,41 +117,220 @@ button {
     place-items: center;
     color: #001308;
     background: var(--green);
-    border-radius: 6px;
+    border-radius: 999px;
     font-weight: 900;
     text-decoration: none;
 }
 
 .site-nav {
     display: flex;
+    flex: 1;
+    align-items: stretch;
     justify-content: center;
-    gap: 6px;
+    gap: 2px;
+    height: 42px;
+    --nav-roll: 44px;
 }
 
-.site-nav a,
-.nav-action {
-    min-height: 38px;
+.site-nav a {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 11px;
+    padding: 0 14px;
+    border-radius: 999px;
     color: var(--muted);
-    border: 1px solid transparent;
-    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
     text-decoration: none;
-    font-size: 0.92rem;
+    overflow: hidden;
+    isolation: isolate;
+    transition: color 0.25s ease;
 }
 
-.site-nav a:hover,
-.site-nav a.active,
-.nav-action:hover {
+/* The fill is a disc parked below the pill that scales up from its own centre,
+   so the highlight arrives from underneath rather than fading in flat. */
+.site-nav a::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: -1;
+    width: 220%;
+    height: 220%;
+    margin: -110% 0 0 -110%;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--green) 15%, transparent);
+    transform: scale(0);
+    transition: transform 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-nav a:hover::before,
+.site-nav a.active::before {
+    transform: scale(1);
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-face,
+.nav-face-alt {
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Two copies of the label roll past each other, which reads as the pill turning
+   over instead of simply recolouring. */
+.nav-face-alt {
+    position: absolute;
+    inset: 0;
+    justify-content: center;
     color: var(--green);
-    border-color: var(--line);
-    background: rgba(77, 255, 136, 0.06);
+    transform: translateY(var(--nav-roll));
+}
+
+.site-nav a:hover .nav-face,
+.site-nav a.active .nav-face {
+    transform: translateY(calc(var(--nav-roll) * -1));
+    transition-duration: 0.5s;
+}
+
+.site-nav a:hover .nav-face-alt,
+.site-nav a.active .nav-face-alt {
+    transform: translateY(0);
+    transition-duration: 0.5s;
+}
+
+.nav-dot {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    z-index: 3;
+    width: 4px;
+    height: 4px;
+    margin-left: -2px;
+    border-radius: 999px;
+    background: var(--green);
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
 }
 
 .nav-action {
-    border-color: var(--line);
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    padding: 0 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--green);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.nav-action:hover {
+    background: color-mix(in srgb, var(--green) 12%, transparent);
+    border-color: color-mix(in srgb, var(--green) 45%, transparent);
+}
+
+.nav-toggle {
+    display: none;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.nav-burger {
+    position: relative;
+    display: block;
+    width: 16px;
+    height: 10px;
+}
+
+.nav-burger span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: top 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-burger span:first-child {
+    top: 1.5px;
+}
+
+.nav-burger span:last-child {
+    top: 7px;
+}
+
+.pill-nav[data-open] .nav-burger span:first-child,
+.pill-nav[data-open] .nav-burger span:last-child {
+    top: 4.25px;
+}
+
+.pill-nav[data-open] .nav-burger span:first-child {
+    transform: rotate(45deg);
+}
+
+.pill-nav[data-open] .nav-burger span:last-child {
+    transform: rotate(-45deg);
+}
+
+.nav-panel {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    padding: 66px 6px 6px;
+    border-radius: 26px;
+    background: rgba(5, 8, 6, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: inset 0 0 0 1px var(--line), 0 20px 44px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.98);
+    transform-origin: top center;
+    transition: opacity 0.22s ease, transform 0.26s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.22s;
+}
+
+.pill-nav[data-open] .nav-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+}
+
+.nav-row {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 18px;
+    color: var(--text);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-row:hover {
+    background: color-mix(in srgb, var(--green) 8%, transparent);
+    color: var(--green);
+}
+
+.nav-row.active {
+    background: color-mix(in srgb, var(--green) 15%, transparent);
+    color: var(--green);
 }
 
 .hero {
@@ -371,15 +566,34 @@ h3 {
     gap: 20px;
 }
 
-.org-logo {
+.logo-plate {
+    display: grid;
     flex: none;
-    width: auto;
-    height: 56px;
+    width: 78px;
+    height: 78px;
+    place-items: center;
+    padding: 13px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: radial-gradient(120% 120% at 50% 0%, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.13), 0 0 0 3px rgba(255, 255, 255, 0.03), 0 6px 16px rgba(0, 0, 0, 0.45);
+    transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+}
+
+.org-logo {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
-.leadership-card .org-logo {
-    height: 40px;
+.education-box:hover .logo-plate,
+.leadership-card:hover .logo-plate {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--green) 42%, transparent);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.18),
+        0 0 0 3px color-mix(in srgb, var(--green) 12%, transparent),
+        0 10px 22px rgba(0, 0, 0, 0.5),
+        0 0 20px color-mix(in srgb, var(--green) 24%, transparent);
 }
 
 .meta {
@@ -667,14 +881,26 @@ h3 {
 
 @media (max-width: 940px) {
     .site-header {
-        grid-template-columns: auto auto;
+        width: min(520px, calc(100% - 28px));
     }
 
-    .site-nav {
-        grid-column: 1 / -1;
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding-bottom: 2px;
+    .site-nav,
+    .nav-action {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: grid;
+    }
+
+    .nav-panel {
+        display: block;
+    }
+
+    /* Collapsed, the pill spans the header so the drop panel has room to read. */
+    .pill-nav {
+        width: 100%;
+        justify-content: space-between;
     }
 
     .project-grid,
@@ -704,51 +930,13 @@ h3 {
         width: calc(100% - 20px);
     }
 
-    .site-header {
-        grid-template-columns: auto 1fr;
-        grid-template-areas:
-            "brand resume"
-            "nav nav";
-        gap: 10px;
-        padding: 9px;
+    .pill-nav {
+        padding: 6px;
     }
 
     .brand-mark {
-        grid-area: brand;
-        width: 40px;
-        height: 40px;
-    }
-
-    .nav-action {
-        grid-area: resume;
-        justify-self: end;
-    }
-
-    .site-nav {
-        grid-area: nav;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 4px;
-        padding: 2px 10px 0 0;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-        mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 22px), transparent);
-    }
-
-    .site-nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    .site-nav a,
-    .nav-action {
-        min-height: 32px;
-        padding: 5px 7px;
-        font-size: 0.8rem;
-    }
-
-    .site-nav a {
-        flex: 0 0 auto;
+        width: 38px;
+        height: 38px;
     }
 
     .hero {
@@ -842,12 +1030,11 @@ h3 {
         gap: 14px;
     }
 
-    .org-logo {
-        height: 44px;
-    }
-
-    .leadership-card .org-logo {
-        height: 30px;
+    .logo-plate {
+        width: 62px;
+        height: 62px;
+        padding: 10px;
+        border-radius: 16px;
     }
 
     .point-list {
@@ -885,23 +1072,20 @@ h3 {
     display: none !important;
 }
 
-/* Typewriter reveal for the hero name. */
+/* TechText fits the name to this box and centres it, so the height is really the
+   room left for the selection frame, its specks and the metric label to breathe. */
 #hero-title {
-    /* One line of height reserved up front, otherwise the block below jumps
-       while the name grows from empty. */
-    min-height: 0.96em;
+    position: relative;
+    height: clamp(118px, 17vw, 186px);
+    margin-bottom: 12px;
+    touch-action: pan-y;
+    user-select: none;
 }
 
-#hero-title.typing::after {
-    content: "_";
-    color: var(--green);
-    animation: blink 1.1s step-end infinite;
-}
-
-/* The $ whoami line carries its own caret, so silence it while the name is
-   being typed rather than showing two blinking cursors at once. */
-.hero-copy-block:has(#hero-title.typing) .command::after {
-    content: none;
+.tech-text-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 /* Custom pointer: a dot that tracks exactly and a ring that trails behind it. */

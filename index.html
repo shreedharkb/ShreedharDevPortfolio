@@ -53,17 +53,24 @@
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
-        <a class="brand-mark" href="#home" aria-label="Shreedhar K B home">SK</a>
-        <nav class="site-nav" aria-label="Primary navigation">
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#hackathons">Hackathons</a>
-            <a href="#skills">Skills</a>
-            <a href="#education">Education</a>
-            <a href="#leadership">Leadership</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <a class="nav-action" id="nav-resume" hidden target="_blank" rel="noopener noreferrer">Resume</a>
+        <div class="pill-nav" id="pill-nav">
+            <a class="brand-mark" href="#home" aria-label="Shreedhar K B home">SK</a>
+            <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+                <span class="nav-dot" aria-hidden="true"></span>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#hackathons">Hackathons</a>
+                <a href="#skills">Skills</a>
+                <a href="#education">Education</a>
+                <a href="#leadership">Leadership</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a class="nav-action" id="nav-resume" hidden target="_blank" rel="noopener noreferrer">Resume</a>
+            <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Open section menu">
+                <span class="nav-burger" aria-hidden="true"><span></span><span></span></span>
+            </button>
+            <div class="nav-panel" id="nav-panel"></div>
+        </div>
     </header>
 
     <main id="main">
