@@ -64,7 +64,7 @@ const TECH = {
     labels: true,
     draggable: true,
     bounce: 0.4,
-    sweep: true,
+    sweep: false,
     speed: 1,
     clickKick: true,
     intro: "none",
@@ -99,9 +99,11 @@ const techSigned = (value) => (value > 0 ? `+${value}` : value < 0 ? `−${-valu
 
 // The react-bits TechText effect, ported without changing its behaviour: every
 // glyph is rasterised twice (solid fill and dashed outline), a lens trails the
-// pointer or sweeps on its own, and the letter under the lens swaps to its outline
-// while a selection frame, orbiting specks and a metric label appear around it.
-// Letters are spring-loaded, so they can be dragged and clicked.
+// pointer, and the letter under the lens swaps to its outline while a selection
+// frame, orbiting specks and a metric label appear around it. Letters are
+// spring-loaded, so they can be dragged and clicked. The demo's auto-sweep is
+// off, so with no pointer over the name every glyph rests on its solid sprite
+// and the title reads as ordinary text.
 function initializeTechText() {
     const container = qs("#hero-title");
     const s = { ...TECH, text: container.textContent.trim(), fontFamily: "" };
